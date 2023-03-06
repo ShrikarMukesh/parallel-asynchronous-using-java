@@ -7,6 +7,7 @@ import static com.learnjava.util.CommonUtil.stopWatch;
 import static com.learnjava.util.LoggerUtil.log;
 
 public class ProductService {
+
     private ProductInfoService productInfoService;
     private ReviewService reviewService;
 
