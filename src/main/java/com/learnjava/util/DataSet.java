@@ -19,12 +19,14 @@ public class DataSet {
 
         Cart cart = new Cart();
         List<CartItem> cartItemList = new ArrayList<>();
+
         IntStream.rangeClosed(1, noOfItemsInCart)
                 .forEach((index) -> {
                     String cartItem = "CartItem -".concat(index + "");
                     CartItem cartItem1 = new CartItem(index, cartItem, generateRandomPrice(), index, false);
                     cartItemList.add(cartItem1);
                 });
+
         cart.setCartItemList(cartItemList);
         return cart;
     }
@@ -60,8 +62,6 @@ public class DataSet {
         return IntStream.rangeClosed(1, maxNumber)
                 .boxed().collect(Collectors.toSet());
     }
-
-
 
     public static double generateRandomPrice() {
         int min = 50;

@@ -8,7 +8,8 @@ import java.util.List;
 import static com.learnjava.util.CommonUtil.delay;
 import static com.learnjava.util.CommonUtil.stopWatch;
 import static com.learnjava.util.LoggerUtil.log;
-
+//Thred, Executors are Task based
+//Fork Join Framework is specifically related to data Parallelism
 public class StringTransformExample {
 
     public static void main(String[] args) {
