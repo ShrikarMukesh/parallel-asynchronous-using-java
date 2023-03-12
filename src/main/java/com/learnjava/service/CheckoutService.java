@@ -12,6 +12,7 @@ import static com.learnjava.util.CommonUtil.startTimer;
 import static com.learnjava.util.CommonUtil.timeTaken;
 
 public class CheckoutService {
+
     private PriceValidatorService priceValidatorService;
 
     public CheckoutService(PriceValidatorService priceValidatorService) {

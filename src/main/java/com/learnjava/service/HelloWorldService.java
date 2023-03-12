@@ -31,5 +31,4 @@ public class HelloWorldService {
             return input+" world!";
         });
     }
-
 }
