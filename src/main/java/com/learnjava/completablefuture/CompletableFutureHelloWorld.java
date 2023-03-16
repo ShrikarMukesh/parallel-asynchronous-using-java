@@ -46,12 +46,20 @@ public class CompletableFutureHelloWorld {
             return "Hi CompletableFutuere";
         });
 
-        String result =  hello.thenCombine(world , (s, s2) -> s+s2)
+        String result =  hello
+                .thenCombine(world , (s, s2) -> s+s2)
                 .thenCombine(hicompletableFuture, (previous, current)->previous+current)
                 .thenApply(String::toUpperCase)
                 .join();
         timeTaken();
         return result;
+    }
+
+    public CompletableFuture<String>  helloWorld_thenCOmpose(){
+        return CompletableFuture.
+                supplyAsync(hws::hello)
+                .thenCompose(s -> hws.worldFuture(s))
+                .thenApply(String::toUpperCase);
     }
 
     public static void main(String[] args) {

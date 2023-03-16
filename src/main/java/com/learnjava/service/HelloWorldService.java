@@ -14,7 +14,7 @@ public class HelloWorldService {
     }
 
     public  String hello() {
-        delay(1000);
+        delay(2000);
         log("inside hello");
         return "hello";
     }

@@ -1,6 +1,7 @@
 package com.learnjava.completablefuture;
 
 import com.learnjava.service.HelloWorldService;
+import com.learnjava.util.CommonUtil;
 import org.junit.jupiter.api.Test;
 import java.util.concurrent.CompletableFuture;
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,5 +42,22 @@ class CompletableFutureHelloWorldTest {
         String helloWorld = completableFutureHelloWorld.helloworld_3_async_calls();
         //then
         assertEquals("HELLO WORLD!HI COMPLETABLEFUTUERE" , helloWorld);
+    }
+
+    @Test
+    void helloworld_thenCOmpose(){
+        //given
+
+        CommonUtil.startTimer();
+        //when
+        CompletableFuture<String> completableFuture = completableFutureHelloWorld.helloWorld_thenCOmpose();
+
+        //then
+        completableFuture.thenAccept(s -> {
+            assertEquals("HELLO WORLD!", s);
+
+        }).join();
+
+        CommonUtil.timeTaken();
     }
 }
