@@ -55,10 +55,21 @@ public class ProductServiceUsingCompletableFuture {
                             return productInfo;
                         });
 
-        CompletableFuture<Review> cfReviewC = CompletableFuture.supplyAsync(() -> reviewService.retrieveReviews(productId));
+        CompletableFuture<Review> cfReviewC = CompletableFuture
+                .supplyAsync(() -> reviewService.retrieveReviews(productId))
+                .exceptionally(ex->{
+                    log("Handle the Exception in reviewService" );
+                    return Review.builder()
+                            .noOfReviews(0)
+                            .overallRating(0.0)
+                            .build();
+                });
 
         Product product = csProductInfo
                 .thenCombine(cfReviewC, (productInfo, review) -> new Product(productId,productInfo,review))
+                .whenComplete((product1, ex) -> {
+                    log("Inside WhenComplete :" + product1 + "and the exception is "+ ex);
+                })
                 .join();
 
         stopWatch.stop();
@@ -75,6 +86,24 @@ public class ProductServiceUsingCompletableFuture {
                     return productOption;
                 }).collect(Collectors.toList());
         return  productListOption;
+    }
+
+    private List<ProductOption>  updateInventory_approach2(ProductInfo productInfo) {
+
+       List<CompletableFuture<ProductOption>> productListOptionList =  productInfo.getProductOptions()
+                .stream()
+                .map(productOption -> {
+                   return CompletableFuture.supplyAsync(()->inventoryService.addInventory(productOption))
+                            .thenApply(
+                                    inventory -> {
+                                        productOption.setInventory(inventory);
+                                        return productOption;
+                                    }
+                            );
+
+                })
+                .collect(Collectors.toList());
+        return productListOptionList.stream().map(CompletableFuture::join).collect(Collectors.toList());
     }
 
     public CompletableFuture<Product> retrieveProductDetails_approach2(String productId) {

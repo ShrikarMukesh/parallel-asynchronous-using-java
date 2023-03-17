@@ -11,5 +11,7 @@
 7. CompletableFuture: 
 8. 
 
+# Swagger Path
+http://localhost:8080/movies/webjars/swagger-ui/index.html?configUrl=/movies/v3/api-docs/swagger-config
 
 https://www.baeldung.com/thread-pool-java-and-guava
