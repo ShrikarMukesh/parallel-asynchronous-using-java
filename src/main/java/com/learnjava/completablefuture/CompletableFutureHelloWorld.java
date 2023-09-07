@@ -71,6 +71,8 @@ public class CompletableFutureHelloWorld {
     public String helloworld_3_async_calls_custom_threadpool(){
 
         startTimer();
+
+        //Threads will be created based on Number of cores
         ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         CompletableFuture<String> hello = CompletableFuture.supplyAsync(()->hws.hello(), executorService);
         CompletableFuture<String> world = CompletableFuture.supplyAsync(()->hws.world(), executorService);
@@ -159,7 +161,7 @@ public class CompletableFutureHelloWorld {
         return result;
     }
 
-    public CompletableFuture<String>  helloWorld_thenCOmpose(){
+    public CompletableFuture<String>  helloWorld_thenCompose(){
         return CompletableFuture.
                 supplyAsync(hws::hello)
                 .thenCompose(s -> hws.worldFuture(s))

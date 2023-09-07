@@ -68,7 +68,7 @@ class CompletableFutureHelloWorldTest {
 
         CommonUtil.startTimer();
         //when
-        CompletableFuture<String> completableFuture = completableFutureHelloWorld.helloWorld_thenCOmpose();
+        CompletableFuture<String> completableFuture = completableFutureHelloWorld.helloWorld_thenCompose();
 
         //then
         completableFuture.thenAccept(s -> {

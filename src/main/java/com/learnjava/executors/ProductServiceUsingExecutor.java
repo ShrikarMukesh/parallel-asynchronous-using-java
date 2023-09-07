@@ -13,11 +13,13 @@ import static com.learnjava.util.LoggerUtil.log;
 
 public class ProductServiceUsingExecutor {
 
+    //It will create
     static ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     private ProductInfoService productInfoService;
     private ReviewService reviewService;
 
+    //constructor injection
     public ProductServiceUsingExecutor(ProductInfoService productInfoService, ReviewService reviewService) {
         this.productInfoService = productInfoService;
         this.reviewService = reviewService;
@@ -28,8 +30,12 @@ public class ProductServiceUsingExecutor {
 
         System.out.println(Runtime.getRuntime().availableProcessors());
 
-        Future<ProductInfo> productInfoFuture = executorService.submit(()->productInfoService.retrieveProductInfo(productId));
-        Future<Review> reviewFuture = executorService.submit(()-> reviewService.retrieveReviews(productId));
+        Future<ProductInfo> productInfoFuture = executorService
+                .submit( ()->
+                        productInfoService.retrieveProductInfo(productId)
+                );
+        Future<Review> reviewFuture = executorService
+                .submit(()-> reviewService.retrieveReviews(productId));
 
         ProductInfo productInfo = productInfoFuture.get(2, TimeUnit.SECONDS);
         Review review = reviewFuture.get();

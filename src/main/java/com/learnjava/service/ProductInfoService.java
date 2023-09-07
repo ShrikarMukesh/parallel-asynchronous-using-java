@@ -17,7 +17,8 @@ public class ProductInfoService {
                 new ProductOption(3, "8GB", "White", 800),
                 new ProductOption(4, "266GB", "Blue", 1127)
         );
-        return ProductInfo.builder().productId(productId)
+        return ProductInfo.builder()
+                .productId(productId)
                 .productOptions(productOptions)
                 .build();
     }
